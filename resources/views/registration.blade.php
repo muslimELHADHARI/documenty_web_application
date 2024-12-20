@@ -82,8 +82,7 @@
                 <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                   <h4 class="mb-4">What is Documenty?</h4>
                   <p class="small mb-0">
-                    Documenty is a web application designed to enhance learning by providing users with access to a wide range of documents and books. It offers an intuitive and organized platform where users can explore materials across various subjects, search for specific topics, and bookmark resources for future reference. With its user-friendly interface, Documenty aims to make knowledge more accessible, supporting both academic and personal growth through a seamless digital library experience.
-                  </p>
+                    Documenty هي تطبيق ويب مصمّم باش يسهّل التعليم ويعطي للمستخدمين إمكانية الوصول إلى مجموعة كبيرة من الوثائق والكتب. يوفر المنصة طريقة منظمة وسهلة باش يكتشفوا المواد في مجالات مختلفة، ويبحثوا على مواضيع معينة، ويعملوا حفظ للموارد اللي يحبوا يرجعوا ليها وقت ما يحبوا. مع واجهته السهلة في الاستعمال، الهدف متاعه هو توصيل المعرفة بطريقة مبسطة، ويدعم النمو الأكاديمي والشخصي من خلال تجربة مكتبة رقمية سلسة.            </p>
                 </div>
               </div>
 

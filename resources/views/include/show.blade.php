@@ -12,8 +12,18 @@
                         <div class="small text-muted">{{ $item->created_at->format('F j, Y') }}</div>
                         <h1 class="card-title mt-3">{{ $item->title }}</h1>
                         <p class="card-text mt-4">{{ $item->description }}</p>
+                        @if($item->category === 'video')
+                        <a href="{{ Storage::url($item->file_path) }}" class="btn btn-primary rounded-pill mt-3" target="_blank" style="padding: 10px 20px;">Show Video</a>
+                    @elseif($item->category === 'document')
                         <a href="{{ Storage::url($item->file_path) }}" class="btn btn-primary rounded-pill mt-3" target="_blank" style="padding: 10px 20px;">Download Document</a>
-                    </div>
+                    @elseif($item->category === 'books')
+                        <a href="{{ Storage::url($item->file_path) }}" class="btn btn-primary rounded-pill mt-3" target="_blank" style="padding: 10px 20px;">Download Books</a>
+                    @elseif($item->category === 'course')
+                        <a href="{{ Storage::url($item->file_path) }}" class="btn btn-primary rounded-pill mt-3" style="padding: 10px 20px;">Download Course</a>
+                    @else
+                    <a href="{{ Storage::url($item->file_path) }}" class="btn btn-primary rounded-pill mt-3" target="_blank" style="padding: 10px 20px;">Show Other</a>
+                    @endif
+                                        </div>
                 </div>
             </div>
 
@@ -27,6 +37,7 @@
                         <h5 class="mb-3">Author Details</h5>
                         <p><strong>Name:</strong> {{ $item->user->name }}</p>
                         <p><strong>Email:</strong> {{ $item->user->email }}</p>
+                        <p><strong>Category:</strong> {{ $item->category }}</p>
                     </div>
                 </div>
             </div>

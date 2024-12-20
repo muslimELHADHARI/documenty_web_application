@@ -20,8 +20,19 @@
                                 <strong>Joined:</strong> {{ $user->created_at->format('F d, Y') }}
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <strong>Role:</strong> <span class="badge bg-secondary">{{ $user->role }}</span>
+                                <strong>Role:</strong>
+                                @if($user->is_admin)
+                                <a href="{{ route('admin.dashboard') }}" class="badge bg-success text-decoration-none outline-0 focus-none" style="box-shadow: none;">
+                                    Admin</a>
+                                
+                                @else
+                                    <span class="badge bg-danger">
+                                        User
+                                    </span>
+                                @endif
                             </li>
+                            
+                            
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 @if($location)
                                 <strong>Location:</strong> {{ $location->countryName }}

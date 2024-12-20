@@ -47,18 +47,47 @@
 
             <!-- Side widgets -->
             <div class="col-lg-4">
-                <!-- Search widget -->
-                <div class="card mb-4 shadow-lg rounded-3 border-0">
-                    <div class="card-header text-center">Search</div>
-                    <div class="card-body">
-                        <form method="GET" action="{{ route('search') }}">
-                            <div class="input-group">
-                                <input class="form-control" type="text" name="query" placeholder="Search..." aria-label="Search" aria-describedby="button-search" />
-                                <button class="btn btn-outline-primary" id="button-search" type="submit">Go!</button>
-                            </div>
-                        </form>
+         <!-- Search widget -->
+<div class="card mb-4 shadow-lg rounded-3 border-0">
+    <div class="card-header text-center">Search</div>
+    <div class="card-body">
+        <form method="GET" action="{{ route('search') }}">
+            <div class="row g-2">
+                <!-- Search Input -->
+                <div class="col-md-8">
+                    <label for="query" class="form-label visually-hidden">Search</label>
+                    <div class="input-group">
+                        <input 
+                            class="form-control" 
+                            type="text" 
+                            name="query" 
+                            id="query" 
+                            placeholder="Search..." 
+                            aria-label="Search" />
                     </div>
                 </div>
+
+                <!-- Category Filter -->
+                <div class="col-md-4">
+                    <label for="category" class="form-label visually-hidden">Category</label>
+                    <select class="form-select" id="category" name="category">
+                        <option value="all" selected>All</option>
+                        <option value="video">Video</option>
+                        <option value="document">Document</option>
+                        <option value="course">Course</option>
+                        <option value="books">Books</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-3">
+                <button class="btn btn-primary w-100" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
                 <!-- Random Quote Widget -->
                 <div class="card mb-4 shadow-lg rounded-3 border-0">
                     <div class="card-header text-center">Random Quote</div>
@@ -110,6 +139,19 @@
                                 <label for="title" class="form-label">Title</label>
                                 <input type="text" class="form-control" id="title" name="title" required>
                             </div>
+                            
+                            <!-- Category Dropdown -->
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Category</label>
+                                <select class="form-control" id="category" name="category" required>
+                                    <option value="course">Course</option>
+                                    <option value="video">Video</option>
+                                    <option value="books">Books</option>
+                                    <option value="document">Document</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+                
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
                                 <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
@@ -120,12 +162,13 @@
                             </div>
                             <div class="mb-3">
                                 <label for="file" class="form-label">Upload Document/Book</label>
-                                <input type="file" class="form-control" id="file" name="file" accept=".pdf,.doc,.docx,.epub" required>
+                                <input type="file" class="form-control" id="file" name="file" accept=".pdf,.doc,.docx,.epub,.mp4" required>
                             </div>
                             <button type="submit" class="btn btn-primary w-100 rounded-pill">Add Item</button>
                         </form>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

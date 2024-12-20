@@ -7,11 +7,16 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\AdminController;
 
-Route::get('/test', function () {
-    return view('test');
+////////////////////////////////////////////////////
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('item/approve/{id}', [AdminController::class, 'approveItem'])->name('approveItem');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/item/{id}/delete', [AdminController::class, 'deleteItem'])->name('deleteItem');
 });
 
+///////////////////////////////////////////////////
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');

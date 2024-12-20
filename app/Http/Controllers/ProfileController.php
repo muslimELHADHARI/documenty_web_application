@@ -12,6 +12,7 @@ use Stevebauman\Location\Facades\Location;
 
 class ProfileController extends Controller
 {
+
     public function edit()
     {
         $user = Auth::user();
@@ -41,22 +42,31 @@ class ProfileController extends Controller
             $path = $request->file('profile_pic')->store('profile_pics', 'public');
             $user->profile_pic = $path;
         }
-        //$user->save();
+
+        //  $user->save();
         return redirect()->route('profile.edit')->with('success', 'Profile updated successfully!');
     }
+
     public function show()
     {
         $user = Auth::user();
+
+        // Get IP address for location tracking
         $ip = request()->ip() === '127.0.0.1' ? '102.111.255.255' : request()->ip();
         $location = Location::get($ip);
+
+        // Fetch activities for the logged-in user
         $activities = Activity::where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();
+
+        // Fetch approved documents for the logged-in user
         $documents = Item::select('title', 'file_path', 'created_at')
             ->where('user_id', $user->id)
             ->whereNotNull('file_path')
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('include.profile', compact('user', 'activities', 'documents', 'location'));
+        $unreadNotificationsCount = Auth::user()->unreadNotifications->count();
+        return view('include.profile', compact('user', 'activities', 'documents', 'location', 'unreadNotificationsCount'));
     }
 }

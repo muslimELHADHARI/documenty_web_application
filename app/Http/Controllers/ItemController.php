@@ -12,28 +12,31 @@ class ItemController extends Controller
 {
     public function show($id)
     {
-        // Fetch the item by ID
-        $item = Item::findOrFail($id);
+        // Fetch the item by ID, only if it's approved
+        $item = Item::where('id', $id)->where('approved', 1)->firstOrFail();
 
         // Return a view with the item details
         return view('include.show', compact('item'));
     }
+
     public function index()
     {
-        // Fetch items from the database
-        $items = Item::orderBy('created_at', 'desc')->get();
-
+        // Fetch only approved items from the database
+        $items = Item::where('approved', 1)->orderBy('created_at', 'desc')->get();
+        $unreadNotificationsCount = Auth::user()->unreadNotifications->count();
         // Pass the items to the view
-        return view('include.main', compact('items'));
+        return view('include.main', compact('items', 'unreadNotificationsCount'));
     }
+
     public function store(Request $request)
     {
         // Validate the incoming data
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
+            'category' => 'required',
             'description' => 'required|string',
-            'cover' => 'required|file|mimes:jpg,jpeg,png|max:10240', // Max file size 10MB
-            'file' => 'required|file|mimes:pdf,doc,docx,epub|max:10240', // Max file size 10MB
+            'cover' => 'required|file|mimes:jpg,jpeg,png|max:20480', // Max file size 10MB
+            'file' => 'required|file|mimes:pdf,doc,docx,epub,mp4|max:20480', // Max file size 10MB
         ]);
 
         // Store the uploaded file in the 'documents' directory
@@ -43,6 +46,7 @@ class ItemController extends Controller
         Item::create([
             'user_id' => Auth::id(), // Assuming each item is associated with a user
             'title' => $validatedData['title'],
+            'category' => $validatedData['category'],
             'description' => $validatedData['description'],
             'file_path' => $filePath,
             'cover_path' => $coverPath,
